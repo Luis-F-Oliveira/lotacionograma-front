@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": ["*"],
+        "@components/*": ["interface/components/*"],
+        "@partials": ["/src/interface/partials/*"],
+        "@pages": ["/src/pages/*"],
+        "@context": ["/src/data/contexts/*"],
+        "@services": ["/src/data/services/*"],
+        "@hooks": ["/src/data/hooks/*"]
+      }
+    }
+  }
