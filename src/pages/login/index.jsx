@@ -1,31 +1,65 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { AxiosContext, useUser } from '@context'
 import { Button } from '@components'
-import { authService } from '@services'
+import { toast } from 'react-toastify'
+import { Link, useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import image from './img.jpg'
 
 const Login = () => {
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+  const { api } = useContext(AxiosContext)
+  const { user, loginUser } = useUser()
+  const navigate = useNavigate()
+  const particlesRef = useRef(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    try {
-      
-    } catch (error) {
-      console.log(error)
+    const isEmpty = (value) => value == null || value.trim() === ''
+
+    if (isEmpty(email)) {
+      toast.warning('Email deve ser preenchido')
+    }
+
+    if (isEmpty(password)) {
+      toast.warning('Senha deve ser preenchida')
+    }
+
+    if (email && password) {
+      api.post('login', {
+        email, password
+      })
+      .then((response) => {
+        const { token, user } = response.data
+        Cookies.set('jwt', token, { expires: 1 })
+        loginUser({
+          id: user.id,
+          username: user.name,
+          email: user.email,
+          darktheme: user.darktheme
+        })
+
+        navigate('home')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     }
   }
 
   useEffect(() => {
-    particlesJS('particles-js', {
-    })
+    if (particlesRef.current) {
+      particlesJS('particles-js', {
+      })
+    }
   }, [])
 
   return (
-    <div id='particles-js' className='w-screen h-screen bg-slate-900 flex items-center justify-center overflow-hidden'>
+    <div ref={particlesRef} id='particles-js' className='w-screen h-screen bg-slate-900 flex items-center justify-center overflow-hidden'>
       <div className='w-2/4 h-2/4 bg-white fixed flex rounded-lg'>
         <form className='w-1/2 px-16 flex flex-col justify-center' onSubmit={handleSubmit}>
           <h1 className='text-emerald-500 text-2xl font-bold mb-1'>Login</h1>
