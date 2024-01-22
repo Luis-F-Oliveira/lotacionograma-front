@@ -1,8 +1,7 @@
-import { faChevronRight, faHouse } from "@fortawesome/free-solid-svg-icons"
+import { faChevronRight, faDownload, faHouse, faUpload } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import Navlink from "./navlink"
-import ButtonTheme from "./theme"
 import Icon from './icon.png'
 
 const Sidebar = () => {
@@ -38,13 +37,16 @@ const Sidebar = () => {
         </div>
         <div className="h-full px-4 pt-5">
           <ul>
-            <Navlink to={'/principal'} open={open} icon={faHouse}>
+            <Navlink to={'/home'} open={open} icon={faHouse}>
               Principal
             </Navlink>
+            <Navlink to={'/import'} open={open} icon={faUpload}>
+              Lançamento
+            </Navlink>
+            <Navlink to={'/export'} open={open} icon={faDownload}>
+              Exportação
+            </Navlink>
           </ul>
-        </div>
-        <div className="flex justify-center dark:border-neutral-900 border-t shadow-sm py-2">
-          <ButtonTheme />
         </div>
       </nav>
     </aside>

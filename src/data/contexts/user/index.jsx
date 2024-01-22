@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
         const savedUser = localStorage.getItem('user');
         return savedUser ? JSON.parse(savedUser) : null;
     })
+    
     useEffect (() => {
         const savedUser = localStorage.getItem('user')
         if (savedUser) {
@@ -27,7 +28,7 @@ export const UserProvider = ({ children }) => {
     }, [])
 
     const loginUser = (userData) => {
-        setUser(userData)
+        setUser({...userData, theme: userData.darktheme})
         localStorage.setItem('user', JSON.stringify(userData))
     }
 

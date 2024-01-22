@@ -40,13 +40,19 @@ const Login = () => {
           id: user.id,
           username: user.name,
           email: user.email,
-          darktheme: user.darktheme
+          darktheme: user.darktheme,
+          access: user.access,
+          office: user.office,
+          capacity: user.capacity,
+          first: user.first
         })
 
         navigate('home')
       })
       .catch((error) => {
-        console.log(error)
+        if (error.response.status === 401) {
+          toast.error('Credenciais incorretas')
+        }
       })
     }
   }

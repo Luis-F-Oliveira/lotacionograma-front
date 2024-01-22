@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons"
-import { AxiosContext } from '@context'
+import { AxiosContext, useUser } from '@context'
 import Cookies from "js-cookie"
 
 const ButtonTheme = () => {
     const [ theme, setTheme ] = useState(false)
     const [ id, setId ] = useState(0)
     const { api } = useContext(AxiosContext)
+    const { user, loginUser } = useUser()
     const token = Cookies.get('jwt')
 
     useEffect(() => {
@@ -33,12 +34,19 @@ const ButtonTheme = () => {
                 'Authorization': `Bearer ${token}`
             } 
         })
-
+        loginUser({ ...user, theme: !theme })
         location.reload()
     }
 
     return (
-        <button onClick={handleTheme} className="bg-slate-950 text-amber-500 dark:bg-amber-500 dark:text-slate-950 w-full mx-3 py-1 rounded-md transition-all">
+        <button 
+            onClick={handleTheme}
+            className="mr-2 text-xl dark:text-amber-500
+            dark:hover:text-amber-600 transition-colors
+            duration-500 dark:active:text-amber-400
+            text-purple-700 hover:text-purple-950
+            active:text-purple-500"
+        >
             { theme ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} /> }
         </button>
     )
