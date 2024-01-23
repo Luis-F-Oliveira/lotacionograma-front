@@ -1,5 +1,5 @@
 import { useMenu, useUser } from '@context'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef } from 'react'
 
@@ -31,9 +31,27 @@ const Perfil = () => {
     >
       {
         activeOption == 1 ? (
-          <p className='text'>
-            {user.username}
-          </p>
+          <div>
+            <p className='-mb-2'>
+              {user.username}
+            </p>
+            <p className='text-sm'>
+              {user.office}
+            </p>
+
+            <p>
+              <FontAwesomeIcon className='mr-1 mt-5' icon={faEnvelope} />
+              {user.email}
+            </p>
+            <p>
+              <FontAwesomeIcon className='mr-1 mt-2' icon={faLocationDot} />
+              {user.capacity}
+            </p>
+            <p>
+              <FontAwesomeIcon className='mr-1 mt-2' icon={faPhone} />
+              {user.capacity}
+            </p>
+          </div>
         ) : (
           null
         )

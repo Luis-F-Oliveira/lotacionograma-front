@@ -11,7 +11,7 @@ const Button = ({ type, styled, size, children }) => {
         duration-500 active:bg-emerald-400
         rounded-md dark:bg-neutral-500
         dark:hover:bg-neutral-600
-        dark:active:bg-neutral-400
+        dark:active:bg-neutral-400 px-2
       `
       break
     case 'outline':
@@ -22,7 +22,7 @@ const Button = ({ type, styled, size, children }) => {
         active:border-emerald-400 active:bg-emerald-400
         dark:border-neutral-500 dark:text-white
         dark:hover:bg-neutral-600 dark:hover:border-neutral-600
-        dark:active:bg-neutral-400 dark:active:border-neutral-400
+        dark:active:bg-neutral-400 dark:active:border-neutral-400 px-2
       `
       break
   }

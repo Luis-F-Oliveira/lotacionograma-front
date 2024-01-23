@@ -5,7 +5,7 @@ import { faHandshake, faLock, faRightFromBracket, faUser, faUsers } from '@forta
 import { useUser, useMenu } from '@context'
 
 const Setting = () => {
-  const { logoutUser } = useUser()
+  const { user, logoutUser } = useUser()
   const { toggleOption, settings } = useMenu()
   const settingsDivRef = useRef(null)
 
@@ -51,11 +51,13 @@ const Setting = () => {
               <FontAwesomeIcon className='mr-0.5  ' icon={faLock} /> Senha
             </Link>
           </li>
+          { user.access >= 3 ? (
           <li className='mb-1'>
             <button onClick={() => toggleOption(3)}>
               <FontAwesomeIcon className='mr-0.5  ' icon={faUsers} /> Registrar
             </button>
           </li>
+          ) : null }
           <li className='flex pl-2 bottom-2 left-1 absolute'>
             <button onClick={logoutUser}>
                 <FontAwesomeIcon icon={faRightFromBracket} /> logout

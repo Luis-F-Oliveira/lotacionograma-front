@@ -13,7 +13,7 @@ const ButtonTheme = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const axios = await api.get('user', {
+            const axios = await api.get('auth', {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Authorization': `Bearer ${token}`
