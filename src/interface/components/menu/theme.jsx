@@ -5,36 +5,18 @@ import { AxiosContext, useUser } from '@context'
 import Cookies from "js-cookie"
 
 const ButtonTheme = () => {
-    const [ theme, setTheme ] = useState(false)
-    const [ id, setId ] = useState(0)
     const { api } = useContext(AxiosContext)
     const { user, loginUser } = useUser()
     const token = Cookies.get('jwt')
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const axios = await api.get('auth', {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then((response) => {
-                setTheme(response.data.darktheme)
-                setId(response.data.id)
-            })
-        }
-        fetchData()
-    }, [api])
-
     const handleTheme = async () => {
-        const axios = await api.put(`darkmode/${id}`, null, {
+        await api.put(`mode/${user.id}`, null, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Authorization': `Bearer ${token}`
             } 
         })
-        loginUser({ ...user, theme: !theme })
+        loginUser({ ...user, theme: !user.theme })
         location.reload()
     }
 
@@ -47,7 +29,7 @@ const ButtonTheme = () => {
             text-purple-700 hover:text-purple-950
             active:text-purple-500"
         >
-            { theme ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} /> }
+            { user.theme ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} /> }
         </button>
     )
 }

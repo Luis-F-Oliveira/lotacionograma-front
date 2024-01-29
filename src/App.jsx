@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { PrivateRoute } from '@hooks'
 import { UserProvider } from '@context'
-import { Login, Home, Import, Export } from '@pages'
+import { Login, Home, Import, Export, Password } from '@pages'
 
 const App = () => {
   return (
@@ -12,6 +12,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />
+          <Route path='/update' element={
+            <PrivateRoute>
+              <Password />
+            </PrivateRoute>
+          } />
           <Route path='/home' element={
             <PrivateRoute>
               <Home />

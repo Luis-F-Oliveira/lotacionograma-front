@@ -38,20 +38,22 @@ const Login = () => {
         Cookies.set('jwt', token, { expires: 1 })
         loginUser({
           id: user.id,
-          username: user.name,
-          email: user.email,
-          darktheme: user.darktheme,
-          access: user.access,
-          office: user.office,
-          capacity: user.capacity,
+          userId: user.user_id,
+          theme: user.theme,
           first: user.first
         })
 
         navigate('home')
       })
       .catch((error) => {
+        if (error.response.status === 404) {
+          toast.error('Usuário não econtrado')
+        }
         if (error.response.status === 401) {
           toast.error('Credenciais incorretas')
+        }
+        if (error.response.status === 301) {
+          toast.error('Senha incorreta')
         }
       })
     }

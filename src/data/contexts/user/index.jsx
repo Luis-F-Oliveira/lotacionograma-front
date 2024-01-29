@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) => {
     }, [])
 
     const loginUser = (userData) => {
-        setUser({...userData, theme: userData.darktheme})
+        setUser({...userData, theme: userData.theme})
         localStorage.setItem('user', JSON.stringify(userData))
     }
 
