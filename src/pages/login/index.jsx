@@ -40,7 +40,8 @@ const Login = () => {
           id: user.id,
           userId: user.user_id,
           theme: user.theme,
-          first: user.first
+          first: user.first,
+          access: user.access
         })
 
         navigate('home')
