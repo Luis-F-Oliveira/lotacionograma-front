@@ -42,6 +42,7 @@ export const UserProvider = ({ children }) => {
                 'Authorization': `Bearer ${token}`
             }
         })
+        location.reload() 
     }
 
     return (

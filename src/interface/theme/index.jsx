@@ -1,5 +1,5 @@
 import { useUser } from '@context'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const Theme = ({ children }) => {
   const { user } = useUser()

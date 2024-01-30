@@ -1,38 +1,44 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useSidebar } from '@context'
+import { useState } from "react"
 
-const Navlink = ({ open, to, icon, children }) => {
-  const [ visible, setVisible ] = useState(false)
+const Navlink = ({ icon, to, children }) => {
+  const { open } = useSidebar()
+  const [ isMouserOver, setIsMouseOver ] = useState(false)
 
-  useEffect(() => {
-    if (open) {
-      const timer = setTimeout(() => {
-        setVisible(true)
-      }, 100)
+  const handleMouseOver = () => {
+    setIsMouseOver(true)
+  }
 
-      return () => clearTimeout(timer)
-    } else {
-      setVisible(false)
-    }
-  }, [open])
+  const handleMouseOut = () => {
+    setIsMouseOver(false)
+  }
 
   return (
-    <Link to={to}>
-        <li 
-          className="hover:bg-emerald-500 hover:text-white text-emerald-500 
-          dark:text-white dark:hover:bg-neutral-700 transition-colors duration-500 
-          rounded-lg p-2 my-3"
+    <div className={`relative mb-2 flex ${ open ? 'justify-start' : 'justify-center pl-1.5'}`}>
+        <Link 
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+            className='text-sm text-emerald-500 dark:text-white
+            hover:text-emerald-800 transition-colors dark:hover:text-white
+            flex items-center' 
+            to={to}
         >
-            <FontAwesomeIcon className="mr-3" icon={icon} />
-            { visible  ? (
-                <span>
-                  { children }
-                </span>
-              ) : null
-            }
-        </li>
-    </Link>
+            <FontAwesomeIcon className="mr-1" icon={icon} /> { open ? children : null}
+        </Link>
+
+        { !open && isMouserOver ? (
+            <div 
+                className="absolute min-w-20 h-7 flex items-center justify-center 
+                rounded-md bg-gray-50 shadow left-10 -top-1.5 text-emerald-500
+                dark:bg-neutral-800 dark:shadow-black dark:text-white text-sm
+                px-2"
+            >
+                { children }
+            </div>
+        ) : null}
+    </div>
   )
 }
 

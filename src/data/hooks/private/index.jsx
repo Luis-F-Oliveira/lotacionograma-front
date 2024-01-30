@@ -11,11 +11,11 @@ const PrivateRoute = ({ children }) => {
     return <Navigate to={'/'} replace />
   }
 
-  // useEffect(() => {
-  //   if (user.first === 0) {
-  //     navigate('/update')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user.first === 0) {
+      navigate('/update')
+    }
+  }, [user])
 
   return <Theme>{ children }</Theme>
 }   
