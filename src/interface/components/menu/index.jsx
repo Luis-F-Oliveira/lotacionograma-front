@@ -5,7 +5,6 @@ import ButtonTheme from "./theme"
 import Setting from "./setting"
 import Perfil from "./perfil"
 import Sac from "./sac"
-import Register from "./register"
 
 const Menu = () => {
   const time = new Date()
@@ -22,7 +21,6 @@ const Menu = () => {
         <div className="flex">
           <Perfil />
           <Sac />
-          <Register />
           <Setting /> 
         </div>
       </div>

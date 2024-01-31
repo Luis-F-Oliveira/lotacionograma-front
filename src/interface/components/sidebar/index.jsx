@@ -6,7 +6,7 @@ import Navlink from './navlink'
 import Dropdown from './dropdown'
 import logo from './icon.png'
 
-const Sidebar = ({ children }) => {
+const Sidebar = () => {
   const { open, handleOpen } = useSidebar()
 
   return (
@@ -31,19 +31,15 @@ const Sidebar = ({ children }) => {
         <FontAwesomeIcon className={`${ open ? 'rotate-180' : 'rotate-0' }`} icon={faChevronRight} />
       </button>
       <nav className='mx-4 mt-3 pt-2'>
-        <h2 className='text-sm text-emerald-500 dark:text-white'>
-          MAIN
-        </h2>
-
         <ul className='mt-2'>
           <li>
             <Navlink to={'/home'} icon={faHome}>
-              Home
+              Principal
             </Navlink>
           </li>
           <li>
-            <Dropdown name={'Teste'} icon={faUser} id={1}>
-              <Link>teste</Link>
+            <Dropdown name={'Usuários'} icon={faUser} id={1}>
+              <Link to={'/register'}>Registrar</Link>
             </Dropdown>
           </li>
         </ul>

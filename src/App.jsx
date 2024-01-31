@@ -4,7 +4,10 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { PrivateRoute } from '@hooks'
 import { UserProvider, SidebarProvider } from '@context'
-import { Login, Home, Import, Export, Password } from '@pages'
+import { 
+  Login, Home, Import, Export, Password ,
+  Register
+} from '@pages'
 
 const App = () => {
   return (
@@ -21,6 +24,11 @@ const App = () => {
             <Route path='/home' element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            } />
+            <Route path='/register' element={
+              <PrivateRoute>
+                <Register />
               </PrivateRoute>
             } />
             <Route path='/import' element={

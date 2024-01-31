@@ -38,6 +38,9 @@ const Dropdown = ({ name, icon, id, children }) => {
           shadow absolute left-10 -top-1 p-2 text-emerald-500
           dark:bg-neutral-800 dark:shadow-black dark:text-white'
         >
+          <h1 className='border-b border-emerald-500 dark:border-white mb-2'>
+            { name }
+          </h1>
           { children }
         </div>
       ) : null}

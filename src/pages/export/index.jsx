@@ -1,10 +1,8 @@
-import { Body, Sidebar, Menu } from '@components'
+import { Body } from '@components'
 
 const Export = () => {
   return (
     <Body>
-      <Sidebar />
-      <Menu />
     </Body>
   )
 }

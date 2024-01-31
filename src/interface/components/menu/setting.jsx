@@ -26,7 +26,7 @@ const Setting = () => {
       ref={settingsDivRef}
       className={`w-36 ${
         settings ? (
-          'h-44'
+          'h-36'
         ) : (
           'h-0'
         )
@@ -51,13 +51,6 @@ const Setting = () => {
               <FontAwesomeIcon className='mr-0.5  ' icon={faLock} /> Senha
             </Link>
           </li>
-          { user.access >= 3 ? (
-          <li className='mb-1'>
-            <button onClick={() => toggleOption(3)}>
-              <FontAwesomeIcon className='mr-0.5  ' icon={faUsers} /> Registrar
-            </button>
-          </li>
-          ) : null }
           <li className='flex pl-2 bottom-2 left-1 absolute'>
             <button onClick={logoutUser}>
                 <FontAwesomeIcon icon={faRightFromBracket} /> logout
