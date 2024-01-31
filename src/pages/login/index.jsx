@@ -51,9 +51,6 @@ const Login = () => {
           toast.error('Usuário não econtrado')
         }
         if (error.response.status === 401) {
-          toast.error('Credenciais incorretas')
-        }
-        if (error.response.status === 301) {
           toast.error('Senha incorreta')
         }
       })
@@ -83,7 +80,6 @@ const Login = () => {
           <Button styled={'solid'} type={'submit'}>
             Sing In
           </Button>
-          <Link to={"/recovery"} className='text-emerald-500'>Esqueci minha senha</Link>
         </form>
         <div className='w-1/2'>
           <img className='rounded-r-lg w-full h-full' src={image} alt="login-img" />
