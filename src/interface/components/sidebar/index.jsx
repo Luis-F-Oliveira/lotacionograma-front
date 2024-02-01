@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faHome, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faChartPie, faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons'
 import { useSidebar } from '@context'
 import { Link } from 'react-router-dom'
 import Navlink from './navlink'
@@ -38,8 +38,8 @@ const Sidebar = () => {
             </Navlink>
           </li>
           <li>
-            <Dropdown name={'Usuários'} icon={faUser} id={1}>
-              <Link to={'/register'}>Registrar</Link>
+            <Dropdown name={'Lotacionograma'} icon={faChartPie} id={1}>
+              <Link to={'/users'}>Servidores</Link>
             </Dropdown>
           </li>
         </ul>

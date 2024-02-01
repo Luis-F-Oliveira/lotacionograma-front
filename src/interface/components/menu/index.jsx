@@ -12,7 +12,7 @@ const Menu = () => {
 
   return (
     <MenuProvider>
-      <div className="fixed top-1 right-1 z-10">
+      <div className="fixed top-1 right-1">
         <div className='flex items-center justify-end'>
           <ButtonTheme />
           <Timer expiryTimestamp={time} />

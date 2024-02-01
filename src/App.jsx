@@ -6,7 +6,7 @@ import { PrivateRoute } from '@hooks'
 import { UserProvider, SidebarProvider } from '@context'
 import { 
   Login, Home, Import, Export, Password ,
-  Register
+  Users
 } from '@pages'
 
 const App = () => {
@@ -26,9 +26,9 @@ const App = () => {
                 <Home />
               </PrivateRoute>
             } />
-            <Route path='/register' element={
+            <Route path='/users' element={
               <PrivateRoute>
-                <Register />
+                <Users />
               </PrivateRoute>
             } />
             <Route path='/import' element={

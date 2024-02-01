@@ -3,7 +3,7 @@ import Home from "./home"
 import Import from "./import"
 import Export from "./export"
 import Password from "./password"
-import Register from "./register"
+import Users from "./users"
 
 export {
     Login,
@@ -11,5 +11,5 @@ export {
     Import,
     Export,
     Password,
-    Register
+    Users
 }

@@ -12,7 +12,7 @@ const Dropdown = ({ name, icon, id, children }) => {
         onClick={() => toggleOption(id)} 
         className={`flex w-full items-center ${ open ? 'justify-between' : 'justify-center'}
         text-emerald-500 hover:text-emerald-800 transition-colors
-        dark:text-white dark:hover:text-white`}
+        dark:text-white dark:hover:text-white text-sm`}
       >
         <div>
           <FontAwesomeIcon icon={icon} /> { open ? name : null }
@@ -28,7 +28,7 @@ const Dropdown = ({ name, icon, id, children }) => {
       { open && activeOption == id ? (
         <div 
           className='flex flex-col pl-2 ml-2 border-l-2 border-emerald-500
-          text-emerald-500 dark:text-white dark:border-white'>
+          text-emerald-500 dark:text-white dark:border-white text-sm'>
           { children }
         </div>
       ) : null}
