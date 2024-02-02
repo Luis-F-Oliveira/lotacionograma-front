@@ -2,6 +2,8 @@ import AxiosContext from "./axios"
 import { useUser, UserProvider } from "./user"
 import { useMenu, MenuProvider } from './menu'
 import { useSidebar, SidebarProvider } from './sidebar'
+import { useTable, TableProvider } from './table'
+import { useModal, ModalProvider } from './modal'
 
 export {
     AxiosContext,
@@ -10,5 +12,9 @@ export {
     useMenu,
     MenuProvider,
     useSidebar,
-    SidebarProvider
+    SidebarProvider,
+    useTable,
+    TableProvider,
+    useModal,
+    ModalProvider
 }

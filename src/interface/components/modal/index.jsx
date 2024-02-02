@@ -1,19 +1,22 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useModal } from '@context'
 
-const Modal = ({ width, height, children, handleClose, title }) => {
+const Modal = () => {
+  const { infos, content, handleOpen } = useModal()
   return (
-    <div className='fixed inset-0 backdrop-blur-sm flex justify-center items-center'>
+    <div className='fixed z-50 inset-0 backdrop-blur-sm flex justify-center items-center'>
       <div 
-        className={`${height} ${width} rounded-md p-2 shadow bg-gray-50
-        dark:bg-neutral-800 dark:shadow-black`}
+        className={`${infos.width} ${infos.height} rounded-md p-2 shadow bg-gray-50
+        dark:bg-neutral-800 dark:shadow-black text-emerald-500 
+        dark:text-white`}
       >
         <div className='relative'>
-          <FontAwesomeIcon onClick={handleClose} className='absolute right-0 text-2xl cursor-pointer' icon={faXmark} />
+          <FontAwesomeIcon onClick={handleOpen} className='absolute right-0 text-2xl cursor-pointer' icon={faXmark} />
           <h1 className='text-xl'>
-            { title }
+            { infos.title }
           </h1>
-          { children }
+          { content }
         </div>
       </div>
     </div>

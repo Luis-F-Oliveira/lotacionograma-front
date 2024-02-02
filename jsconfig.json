@@ -4,10 +4,11 @@
       "paths": {
         "@/*": ["*"],
         "@components/*": ["interface/components/*"],
+        "@partials": ["/src/interface/partials/*"],
         "@theme": ["/src/interface/theme/*"],
-        "@pages": ["/src/pages/*"],
         "@context": ["/src/data/contexts/*"],
-        "@hooks": ["/src/data/hooks/*"]
+        "@hooks": ["/src/data/hooks/*"],
+        "@pages": ["/src/pages/*"],
       }
     }
   }
