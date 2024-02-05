@@ -32,25 +32,7 @@ const Perfil = () => {
       {
         activeOption == 1 ? (
           <div>
-            <p className='-mb-2'>
-              {user.username}
-            </p>
-            <p className='text-sm'>
-              {user.office}
-            </p>
-
-            <p>
-              <FontAwesomeIcon className='mr-1 mt-5' icon={faEnvelope} />
-              {user.email}
-            </p>
-            <p>
-              <FontAwesomeIcon className='mr-1 mt-2' icon={faLocationDot} />
-              {user.capacity}
-            </p>
-            <p>
-              <FontAwesomeIcon className='mr-1 mt-2' icon={faPhone} />
-              {user.capacity}
-            </p>
+            <h1>Em obras...</h1>
           </div>
         ) : (
           null

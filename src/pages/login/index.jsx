@@ -4,7 +4,7 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { AxiosContext, useUser } from '@context'
 import { Button } from '@components'
 import { toast } from 'react-toastify'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import image from './img.jpg'
 

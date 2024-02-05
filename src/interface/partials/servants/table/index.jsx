@@ -1,12 +1,15 @@
 import { faAddressCard, faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useTable, useModal } from '@context'
-import { useEffect, Fragment, useState } from 'react'
+import { useTable, useModal, useUser } from '@context'
+import { useEffect, Fragment, useContext } from 'react'
 import { Register } from '../modal/register'
+import { AxiosContext } from '@/data/contexts'
 
 export const Table = () => {
   const { data, getApi } = useTable()
   const { handleModal } = useModal()
+  const { user } = useUser()
+  const { api } = useContext(AxiosContext)
 
   useEffect(() => {
     getApi('servants')
@@ -26,6 +29,7 @@ export const Table = () => {
           <table className='table-auto mt-5 border-collapse'>
             <thead className='bg-neutral-100 dark:bg-neutral-700 border-b-2 border-gray-200 dark:border-neutral-800 h-12 font-bold'>
               <tr>
+                <th className='text-center px-2'>#</th>
                 <th className='text-start min-w-28 px-2'>Matricula</th>
                 <th className='text-start min-w-28 px-2'>Nome</th>
                 <th className='text-start min-w-28 px-2'>Aniversário</th>
@@ -49,6 +53,7 @@ export const Table = () => {
               hover:bg-neutral-200 transition-colors dark:bg-neutral-600
               dark:hover:bg-neutral-800 dark:border-neutral-700' 
               >
+                <th className='px-2 text-center'>{ index+1 }</th>
                 <td className='px-2'>{ servants.user.matriculation }</td>
                 <td className='px-2'>{ servants.user.name }</td>
                 <td className='px-2'>{ servants.user.birth }</td>
@@ -56,17 +61,25 @@ export const Table = () => {
                 <td className='px-2'>{ servants.user.gender }</td>
                 <td className='px-2'>{ servants.user.race }</td>
                 <td className='px-2'>{ servants.user.phone }</td>
-                { servants.areas.map((area, areaIndex) => (
-                  <Fragment key={areaIndex}>
-                    {area.type === 1 && <td className='px-2'>{area.name}</td>}
-                    {area.type === 2 && <td className='px-2'>{area.name}</td>}
+                { servants.areas.length ? 
+                  (servants.areas.map((area, areaIndex) => (
+                    <Fragment key={areaIndex}>
+                      { area.type === 1 ? <td className='px-2'>{area.name}</td> : <td className='px-2'>Sem área</td> }
+                      { area.type === 2 ? <td className='px-2'>{area.name}</td> : <td className='px-2'>Sem área</td> }
+                    </Fragment>
+                    )
+                  )) : (
+                  <Fragment>
+                    <td className='px-2'>Sem área</td>
+                    <td className='px-2'>Sem área</td>
                   </Fragment>
-                )) }
+                  ) }
                 <td className='px-2'>{ servants.role.name }</td>
                 <td className='px-2'>{ servants.department.name }</td>
                 <td className='px-2'>{ servants.user.admission }</td>
                 <td 
-                  onClick={() => handleModal('w-2/12', 'min-h-auto', 'Cadastrar', Register(servants.user.name, servants.user.id))} 
+                  onClick={() => handleModal('w-2/12', 'min-h-auto', 'Cadastrar', 
+                  <Register servantsName={servants.user.name} servantsId={servants.user.id} />)} 
                   className='px-2 text-center text-xl cursor-pointer'
                 >
                   <FontAwesomeIcon icon={faAddressCard} />

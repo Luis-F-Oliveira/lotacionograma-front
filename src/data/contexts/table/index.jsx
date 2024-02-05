@@ -25,7 +25,7 @@ export const TableProvider = ({ children }) => {
                 }
             })
 
-            setData(response.data.servants)
+            setData(response.data.data)
         } catch (error) {
             console.log(error)            
         }
