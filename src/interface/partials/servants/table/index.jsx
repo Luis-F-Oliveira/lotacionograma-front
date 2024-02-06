@@ -1,15 +1,13 @@
 import { faAddressCard, faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTable, useModal, useUser } from '@context'
-import { useEffect, Fragment, useContext } from 'react'
+import { useEffect, Fragment } from 'react'
 import { Register } from '../modal/register'
-import { AxiosContext } from '@/data/contexts'
 
 export const Table = () => {
   const { data, getApi } = useTable()
   const { handleModal } = useModal()
   const { user } = useUser()
-  const { api } = useContext(AxiosContext)
 
   useEffect(() => {
     getApi('servants')
@@ -27,12 +25,12 @@ export const Table = () => {
       ) : (
         <div className='w-full overflow-x-auto'>
           <table className='table-auto mt-5 border-collapse'>
-            <thead className='bg-neutral-100 dark:bg-neutral-700 border-b-2 border-gray-200 dark:border-neutral-800 h-12 font-bold'>
+            <thead className='bg-neutral-100 dark:bg-neutral-700 border-b-2 border-gray-300 dark:border-neutral-800 h-12 font-bold'>
               <tr>
                 <th className='text-center px-2'>#</th>
                 <th className='text-start min-w-28 px-2'>Matricula</th>
                 <th className='text-start min-w-28 px-2'>Nome</th>
-                <th className='text-start min-w-28 px-2'>Aniversário</th>
+                <th className='text-start min-w-28 px-2'>Nascimento</th>
                 <th className='text-start min-w-28 px-2'>Email</th>
                 <th className='text-start min-w-28 px-2'>Genero</th>
                 <th className='text-start min-w-28 px-2'>Raça</th>
@@ -42,9 +40,8 @@ export const Table = () => {
                 <th className='text-start min-w-28 px-2'>Cargo</th>
                 <th className='text-start min-w-28 px-2'>Departamento</th>
                 <th className='text-start min-w-28 px-2'>Admissão</th>
-                <th className='text-center min-w-28 px-2'>Cadastrar</th>
-                <th className='text-center min-w-28 px-2'>Apagar</th>
-                <th className='text-center min-w-28 px-2'>Editar</th>
+                { user.access == 4 ? <th className='text-center min-w-28 px-2'>Cadastrar</th> : null }
+                { user.access >= 3 ?<th className='text-center min-w-28 px-2'>Editar</th> : null }
               </tr>
           </thead>
           <tbody>
@@ -77,19 +74,20 @@ export const Table = () => {
                 <td className='px-2'>{ servants.role.name }</td>
                 <td className='px-2'>{ servants.department.name }</td>
                 <td className='px-2'>{ servants.user.admission }</td>
-                <td 
-                  onClick={() => handleModal('w-2/12', 'min-h-auto', 'Cadastrar', 
-                  <Register servantsName={servants.user.name} servantsId={servants.user.id} />)} 
-                  className='px-2 text-center text-xl cursor-pointer'
-                >
-                  <FontAwesomeIcon icon={faAddressCard} />
-                </td>
-                <td className='px-2 text-center text-xl cursor-pointer'>
-                  <FontAwesomeIcon icon={faTrashCan} />
-                </td>
-                <td className='px-2 text-center text-xl cursor-pointer'>
-                  <FontAwesomeIcon icon={faPencil} />
-                </td>
+                { user.access == 4 ? (
+                  <td 
+                    onClick={() => handleModal('w-2/12', 'min-h-auto', 'Cadastrar', 
+                    <Register servantsName={servants.user.name} servantsId={servants.user.id} />)} 
+                    className='px-2 text-center text-xl cursor-pointer'
+                  >
+                    <FontAwesomeIcon icon={faAddressCard} />
+                  </td>
+                ) : null}
+                { user.access >= 3 ? (
+                  <td className='px-2 text-center text-xl cursor-pointer'>
+                    <FontAwesomeIcon icon={faPencil} />
+                  </td>
+                ) : null}
               </tr>
             )) }
           </tbody>
