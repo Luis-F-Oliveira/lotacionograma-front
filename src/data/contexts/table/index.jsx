@@ -31,8 +31,24 @@ export const TableProvider = ({ children }) => {
         }
     }
 
+    const postApi = async (url, option, column, value, type) => {
+        try {
+            const response = await api.post(url, {
+                option, column, value, type
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            setData(response.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <TableContext.Provider value={{ data, getApi }}>
+        <TableContext.Provider value={{ data, getApi, postApi }}>
             { children }
         </TableContext.Provider>
     )

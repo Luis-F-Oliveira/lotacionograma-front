@@ -3,7 +3,7 @@ import Home from "./home"
 import Import from "./import"
 import Export from "./export"
 import Password from "./password"
-import Users from "./users"
+import Servants from "./servants"
 
 export {
     Login,
@@ -11,5 +11,5 @@ export {
     Import,
     Export,
     Password,
-    Users
+    Servants
 }

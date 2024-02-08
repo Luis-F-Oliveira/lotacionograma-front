@@ -39,7 +39,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Dropdown name={'Lotacionograma'} icon={faChartPie} id={1}>
-              <Link to={'/users'}>Servidores</Link>
+              <Link to={'/servants'}>Servidores</Link>
             </Dropdown>
           </li>
         </ul>

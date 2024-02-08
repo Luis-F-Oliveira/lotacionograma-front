@@ -6,7 +6,7 @@ import { PrivateRoute } from '@hooks'
 import { UserProvider } from '@context'
 import { 
   Login, Home, Import, Export, Password ,
-  Users
+  Servants
 } from '@pages'
 
 const App = () => {
@@ -25,9 +25,9 @@ const App = () => {
               <Home />
             </PrivateRoute>
           } />
-          <Route path='/users' element={
+          <Route path='/servants' element={
             <PrivateRoute>
-              <Users />
+              <Servants />
             </PrivateRoute>
           } />
           <Route path='/import' element={

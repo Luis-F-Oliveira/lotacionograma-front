@@ -1,10 +1,17 @@
 import { faBookmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState, useEffect, useRef } from 'react'
+import { useTable } from '@context'
 
 export const Search = () => {
+    const [ option, setOption ] = useState('')
+    const [ column, setColumn ] = useState('')
+    const [ value, setValue ] = useState('')
+    const [ type, setType ] = useState('')
+
     const [ options, setOptions ] = useState(false)
     const inputRef = useRef(null)
+    const { postApi } = useTable()
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -27,24 +34,29 @@ export const Search = () => {
             setOptions(false)
         }
     }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        postApi('servants/search', option, column, value, type)
+    }
 
     const buttons = [
-        { text: 'Matricula', value: 1 },
-        { text: 'Nome', value: 2 },
-        { text: 'Data Nascimento', value: 3 },
-        { text: 'Email', value: 4 },
-        { text: 'Genero', value: 5 },
-        { text: 'Raça', value: 6 },
-        { text: 'Telefone', value: 7 },
-        { text: 'Area-Meio', value: 8 },
-        { text: 'Area-Fim', value: 9 },
-        { text: 'Cargo', value: 10 },
-        { text: 'Departamento', value: 11 },
-        { text: 'Admissão', value: 12 }
+        { text: 'Matricula', option: 'users', column: 'matriculation', type: 0 },
+        { text: 'Nome', option: 'users', column: 'name', type: 0 },
+        { text: 'Data Nascimento', option: 'users', column: 'birth', type: 0 },
+        { text: 'Email', option: 'users', column: 'email', type: 0 },
+        { text: 'Gênero', option: 'users', column: 'gender', type: 0 },
+        { text: 'Raça', option: 'users', column: 'race', type: 0 },
+        { text: 'Telefone', option: 'users', column: 'phone', type: 0 },
+        { text: 'Area-Meio', option: 'areas', column: 'name', type: 1 },
+        { text: 'Area-Fim', option: 'areas', column: 'name', type: 2 },
+        { text: 'Cargo', option: 'roles', column: 'name', type: 0 },
+        { text: 'Departamento', option: 'departments', column: 'name', type: 0 },
+        { text: 'Admissão', option: 'users', column: 'admission', type: 0 }
     ]
     
     return (
-        <form className='flex flex-col relative'>
+        <form className='flex flex-col relative' onSubmit={handleSubmit} onChange={handleChange}>
             <div 
                 className='bg-gray-50 p-2 rounded-md
                 mb-1 flex items-center gap-2 shadow
@@ -55,7 +67,7 @@ export const Search = () => {
                     ref={inputRef}
                     type="text" 
                     placeholder='ALT + K'
-                    onChange={handleChange}
+                    onChange={(e) => setValue(e.target.value)}
                     className='bg-transparent placeholder:text-emerald-500
                     placeholder:dark:text-white outline-0 placeholder:text-sm'
                 />
@@ -68,16 +80,27 @@ export const Search = () => {
                 rounded-md opacity-1 p-1 py-3 flex-col gap-1
                 ${ options ? 'flex' : 'hidden' }`}
             >
-                { buttons.map((button, index) => (
-                    <button 
-                        key={index}
-                        className='text-start mx-2 py-1 pl-2 rounded
+                { buttons.map((items, index) => (
+                    <div 
+                        key={index} 
+                        className='mx-2 py-1 pl-2 rounded
                         hover:bg-emerald-500 hover:text-white transition-colors
                         active:bg-emerald-400 dark:hover:bg-neutral-700
                         dark:active:bg-neutral-600'
                     >
-                        <FontAwesomeIcon icon={faBookmark} /> { button.text }
-                    </button>
+                        {/* <input onChange={(e) => setOption(e.target.value)} type="text" className='bg-transparent' value={items.option} /> */}
+                        <button 
+                            type='submit'
+                            className='text-start'
+                            onClick={() => { 
+                                setOption(items.option);
+                                setColumn(items.column);
+                                setType(items.type)
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faBookmark} /> { items.text }
+                        </button>
+                    </div>   
                 ))}
             </div>
         </form>

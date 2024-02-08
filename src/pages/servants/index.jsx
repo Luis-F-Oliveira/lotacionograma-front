@@ -2,7 +2,7 @@ import { Body } from '@components'
 import { TableProvider } from '@context'
 import { Table, Import, Export, Search } from '@/interface/partials/servants'
 
-const Users = () => {
+const Servants = () => {
   return (
     <Body>
       <h1 className='text-2xl mb-5'>
@@ -23,4 +23,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Servants
