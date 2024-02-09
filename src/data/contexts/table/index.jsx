@@ -1,5 +1,7 @@
 import { useState, useContext, createContext } from 'react'
 import { AxiosContext } from '..'
+import { toastify } from '@/interface/components'
+import { useUser } from '..'
 import Cookies from 'js-cookie'
 
 const TableContext = createContext()
@@ -15,6 +17,7 @@ export const useTable = () => {
 export const TableProvider = ({ children }) => {
     const [ data, setData ] = useState([])
     const { api } = useContext(AxiosContext)
+    const { user } = useUser()
     const token = Cookies.get('jwt')
 
     const getApi = async (url) => {
@@ -41,9 +44,11 @@ export const TableProvider = ({ children }) => {
                 }
             })
 
-            setData(response.data.data)
+            setData([response.data.data])
         } catch (error) {
-            console.log(error)
+            if (error.response.status) {
+                toastify('Servidor não econtrado', 'error', user.theme)
+            }
         }
     }
 

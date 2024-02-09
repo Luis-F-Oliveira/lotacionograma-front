@@ -1,6 +1,6 @@
 import { Body } from '@components'
 import { TableProvider } from '@context'
-import { Table, Import, Export, Search } from '@/interface/partials/servants'
+import { Table, Import, Export, Search, Clear } from '@/interface/partials/servants'
 
 const Servants = () => {
   return (
@@ -15,7 +15,10 @@ const Servants = () => {
             <Import />
             <Export />
           </div>
-          <Search />
+          <div className='flex items-center gap-2'>
+            <Clear />
+            <Search />
+          </div>
         </div>
         <Table />
       </TableProvider>

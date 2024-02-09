@@ -37,7 +37,10 @@ export const Search = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        postApi('servants/search', option, column, value, type)
+        if (postApi('servants/search', option, column, value, type)) {
+            inputRef.current.value = ''
+            setOptions(false)
+        }
     }
 
     const buttons = [
